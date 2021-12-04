@@ -4,8 +4,7 @@ import AddDataForm from './AddDataForm';
 import EditUser from './EditUser';
 import { Table, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
-// import debounce from "lodash.debounce";
-// import { SearchOutlined } from '@ant-design/icons'
+import debounce from "lodash.debounce";
 const { Search } = Input;
 
 class Users extends Component {
@@ -32,7 +31,6 @@ class Users extends Component {
         this.setState({
             usersItems: resp.data
         })
-        console.log("In GetAllUsers");
     }
 
     deleteHandler = (id) => {
@@ -78,7 +76,7 @@ class Users extends Component {
         this.getAllUsers();
     }
 
-    editHandler = async (response) => {
+    editHandler = (response) => {
         this.setState({
             isEditing: true,
             editUserData: response
@@ -89,73 +87,41 @@ class Users extends Component {
         console.log(value)
     }
 
-    // useEffect((!thi) => {
-    //     this.getAllUsers
-    //     return () => {
-    //         cleanup
-    //     }
-    // }, [this.state.setQuery])
 
     // searchHandleChange = (event) => {
-    //     if(event.target.value===""){
-    //         this.getAllUsers()
-    //     }else{
-    //         const trimrdValue =event.target.value.trim()
-    //         this.setState({
-    //             setQuery: trimrdValue
-    //         })
-    //         console.log(trimrdValue)    
-    //         var searchData = this.state.usersItems.filter((value) => {
-    //             return value.name.includes(trimrdValue);
-    //         })
-    //         console.log("searchData",searchData);
-    //         // this.searchItems(searchData);
-            // this.setState({
-            //     usersItems: searchData
-            // })
-    //     }
+    //     this.setState({
+    //         setQuery: event.target.value
+    //     })
+    //     var searchData = this.state.usersItems.filter((value) => {
+    //         return value.name.toLowerCase().includes(event.target.value) 
+    //     })
+    //     // console.log(searchData)
+    //     this.setState({
+    //         usersItems: searchData
+    //     })
     // }
 
-    searchHandleChange = (event) => {
-        this.setState({
-            setQuery: event.target.value
-        })
-        var searchData = this.state.usersItems.filter((value) => {
-            return value.name.toLowerCase().includes(event.target.value) 
-        })
-        // console.log(searchData)
-        this.setState({
-            usersItems: searchData
-        })
+    search = (rows) => {
+        return rows.filter((row) => row.name.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.username.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.email.toLowerCase().indexOf(this.state.setQuery.trim()) > -1);
     }
 
-    // searchItems = (searchData) => {
-    //     if (searchData // 👈 null and undefined check
-    //         && Object.keys(searchData).length === 0
-    //         && Object.getPrototypeOf(searchData) === Object.prototype) {
-    //         this.getAllUsers()
-
-    //     } else {
-    //         this.setState({
-    //             usersItems: searchData
-    //         })
+    // ddata =debounce(()=>{
+    //     search = (rows) => {
+    //         return rows.filter((row) => row.name.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.username.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.email.toLowerCase().indexOf(this.state.setQuery.trim()) > -1);
     //     }
-    // }
+    // },1000)
 
     columns = [
         {
             key: '1',
             title: 'ID',
-            dataIndex: 'id',
+            dataIndex: 'key',
         },
         {
             key: '2',
             title: 'Name',
             dataIndex: 'name',
             sorter: (a, b) => a.name.length - b.name.length,
-            onFilter: (item) => {
-                return item.name.toLowerCase().includes(this.state.setQuery)
-            }
         },
         {
             key: '3',
@@ -260,8 +226,7 @@ class Users extends Component {
                 </div>
                 <div className="container">
                     <Search
-                        onChange={this.searchHandleChange}
-                        // onChange={(e)=>{this.searchHandleChange(e.target.value)}}
+                        onChange={(e) => this.setState({ setQuery: e.target.value })}
                         value={this.state.setQuery}
                         placeholder="input search text"
                         onSearch={this.onSearch}
@@ -270,7 +235,7 @@ class Users extends Component {
                 <br />
                 <header className="App-header">
                     <Table
-                        dataSource={this.state.usersItems}
+                        dataSource={this.search(this.state.usersItems)}
                         columns={this.columns}
                         pagination={{
                             current: this.state.setPage,
@@ -291,37 +256,6 @@ class Users extends Component {
 
 export default Users;
 
-
-
-// Garbage Data
-// filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => {
-//     return <Input
-//         autoFocus
-//         placeholder="search here"
-//         value={selectedKeys[0]}
-//         onChange={(e) => {
-//             setSelectedKeys(e.target.value ? [e.target.value] : [])
-//         }}
-//         onBlur={() => {
-//             confirm()
-//         }}
-//         onPressEnter={()=>{
-//             confirm()
-//         }}
-
-//     ></Input >
-// },
-// filterIcon: () => {
-//     return <SearchOutlined />
-// },
-
-// {
-//     this.filteredItems.map((value) => {
-//         return console.log(value);
-//     })
-// }
-
-
 //<ul>
   //  {this.state.usersItems.map((item) => {
         // return (
@@ -334,32 +268,3 @@ export default Users;
         // )
 //    })}
 //</ul>
-
-
-
-
-// getFilteredItems = (query, items) => {
-    //     console.log("In filtered Items");
-    //     if (!query) {
-    //         return items;
-    //     }
-    //     return items.filter((value) => {
-    //         return value.name.toLowerCase().includes(query) || value.email.toLowerCase().includes(query) || value.username.toLowerCase().includes(query)
-    //     })
-    // }
-    // filteredItems = this.getFilteredItems(this.state.setQuery, this.state.usersItems);
-    // updateQuery = (e) => this.setState({ setQuery: e.target.value })
-    // searchHandleChange = debounce(this.updateQuery, 1000)
-
-    // searchHandleChange = (e) => {
-    //     this.setState({
-    //         setQuery: e.target.value
-    //     })
-    // }
-
-    // searchHandleChange =(resp)=>{
-    //     this.setState({
-    //         setQuery:resp
-    //     })
-    //     console.log(this.state.setQuery)
-    // }
