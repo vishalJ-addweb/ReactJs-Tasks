@@ -7,7 +7,7 @@ const { Step } = Steps;
 const AllSteps = (props) => {
 
     const [current, setCurrent] = useState(0);
-    const [step, setStep] = useState(1)
+    // const [step, setStep] = useState(1)
 
     const next = () => {
         const nextStep = current + 1;
