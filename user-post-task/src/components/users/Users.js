@@ -101,15 +101,18 @@ class Users extends Component {
     //     })
     // }
 
+    // debounceFunc = debounce((rows) => {
+    //     return rows.filter((row) => row.name.toLowerCase().includes(this.state.setQuery.trim().toLowerCase())
+    //         || row.username.toLowerCase().includes(this.state.setQuery.trim().toLowerCase()) || row.email.toLowerCase().includes(this.state.setQuery.trim().toLowerCase()))
+    //     }
+    //     , 1000)
+
     search = (rows) => {
-        return rows.filter((row) => row.name.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.username.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.email.toLowerCase().indexOf(this.state.setQuery.trim()) > -1);
+    return rows.filter((row) => row.name.toLowerCase().includes(this.state.setQuery.trim().toLowerCase())
+        || row.username.toLowerCase().includes(this.state.setQuery.trim().toLowerCase()) || row.email.toLowerCase().includes(this.state.setQuery.trim().toLowerCase())
+        );
     }
 
-    // ddata =debounce(()=>{
-    //     search = (rows) => {
-    //         return rows.filter((row) => row.name.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.username.toLowerCase().indexOf(this.state.setQuery.trim()) > -1 || row.email.toLowerCase().indexOf(this.state.setQuery.trim()) > -1);
-    //     }
-    // },1000)
 
     columns = [
         {
@@ -227,6 +230,11 @@ class Users extends Component {
                 <div className="container">
                     <Search
                         onChange={(e) => this.setState({ setQuery: e.target.value })}
+                        // onChange={(e) => {
+                        //     this.setState({ setQuery: e.target.value });
+                        //     this.debounceFunc(e.target.value);
+                        // }}
+                        // onChange={(e)=>this.searchHandleChange(e.target.value,this.state.usersItems)}
                         value={this.state.setQuery}
                         placeholder="input search text"
                         onSearch={this.onSearch}
@@ -236,6 +244,8 @@ class Users extends Component {
                 <header className="App-header">
                     <Table
                         dataSource={this.search(this.state.usersItems)}
+                        // dataSource={this.state.usersItems}
+                        // dataSource={this.debounceFunc(this.state.usersItems)}
                         columns={this.columns}
                         pagination={{
                             current: this.state.setPage,
