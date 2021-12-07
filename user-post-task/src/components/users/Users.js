@@ -4,7 +4,6 @@ import AddDataForm from './AddDataForm';
 import EditUser from './EditUser';
 import { Table, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
-import debounce from "lodash.debounce";
 const { Search } = Input;
 
 class Users extends Component {
@@ -100,12 +99,6 @@ class Users extends Component {
     //         usersItems: searchData
     //     })
     // }
-
-    // debounceFunc = debounce((rows) => {
-    //     return rows.filter((row) => row.name.toLowerCase().includes(this.state.setQuery.trim().toLowerCase())
-    //         || row.username.toLowerCase().includes(this.state.setQuery.trim().toLowerCase()) || row.email.toLowerCase().includes(this.state.setQuery.trim().toLowerCase()))
-    //     }
-    //     , 1000)
 
     search = (rows) => {
     return rows.filter((row) => row.name.toLowerCase().includes(this.state.setQuery.trim().toLowerCase())
@@ -230,11 +223,6 @@ class Users extends Component {
                 <div className="container">
                     <Search
                         onChange={(e) => this.setState({ setQuery: e.target.value })}
-                        // onChange={(e) => {
-                        //     this.setState({ setQuery: e.target.value });
-                        //     this.debounceFunc(e.target.value);
-                        // }}
-                        // onChange={(e)=>this.searchHandleChange(e.target.value,this.state.usersItems)}
                         value={this.state.setQuery}
                         placeholder="input search text"
                         onSearch={this.onSearch}
@@ -244,8 +232,6 @@ class Users extends Component {
                 <header className="App-header">
                     <Table
                         dataSource={this.search(this.state.usersItems)}
-                        // dataSource={this.state.usersItems}
-                        // dataSource={this.debounceFunc(this.state.usersItems)}
                         columns={this.columns}
                         pagination={{
                             current: this.state.setPage,
