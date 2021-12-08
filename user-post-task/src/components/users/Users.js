@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import AddDataForm from './AddDataForm';
+// import AddDataForm from './AddDataForm';
+import AddDataFormFunc from './AddDataFormFunc';
 import EditUser from './EditUser';
 import { Table, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
@@ -214,7 +215,7 @@ class Users extends Component {
             <>
                 <div>
                     {!this.state.isAddData && <Button onClick={this.startAddDataHandler}>Add New User</Button>}
-                    {this.state.isAddData && <AddDataForm onSaveUserData={this.saveUserDataHandler} onCancel={this.stopAddDataHandler} />}
+                    {this.state.isAddData && <AddDataFormFunc onSaveUserData={this.saveUserDataHandler} onCancel={this.stopAddDataHandler} />}
                 </div>
                 <br />
                 <div>

@@ -6,7 +6,6 @@ export class EditUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false,
             setName: "",
             setEmail: "",
             remainingUserData: []

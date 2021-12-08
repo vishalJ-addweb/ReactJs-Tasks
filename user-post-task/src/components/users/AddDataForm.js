@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css';
-// import { Form, Input, Button} from 'antd';
 
 export class AddDataForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isEditing: false,
+            // isEditing: false,
             setName: "",
             setUserName: "",
             setEmail: "",

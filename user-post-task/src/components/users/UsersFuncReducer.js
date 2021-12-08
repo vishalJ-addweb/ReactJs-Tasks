@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import AddDataForm from './AddDataForm';
-import EditUser from './EditUser';
+// import EditUser from './EditUser';
+import EditUserFunc from './EditUserFunc';
 import { Table, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 const { Search } = Input;
@@ -188,7 +189,7 @@ const UsersFunc = () => {
             </div>
             <br />
             <div>
-                {state.isEditing ? <EditUser editUser={state.editUserData} onCancel={() => dispatchFunc({ type: "ShowEditForm" })} onEditSuccess={updateDataHandler} /> : null}
+                {state.isEditing ? <EditUserFunc editUser={state.editUserData} onCancel={() => dispatchFunc({ type: "ShowEditForm" })} onEditSuccess={updateDataHandler} /> : null}
             </div>
             <div className="container">
                 <Search
