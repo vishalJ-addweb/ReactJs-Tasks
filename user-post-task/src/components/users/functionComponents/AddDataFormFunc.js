@@ -22,7 +22,7 @@ const AddDataFormFunc = (props) => {
         if (name && userName && email && street && suite && city && zipCode && lat && lng && phone && website && compName && catchPhrase && bs) {
             const userData = {
                 name: name,
-                userName: userName,
+                username: userName,
                 email: email,
                 address: {
                     street: street,

@@ -1,8 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
-import AddDataForm from './AddDataForm';
-// import EditUser from './EditUser';
-import EditUserFunc from './EditUserFunc';
+import AddDataFormFuncReducer from './AddDataFormFuncReducer';
+import EditUserFuncReducer from './EditUserFuncReducer';
 import { Table, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
 const { Search } = Input;
@@ -185,11 +184,11 @@ const UsersFunc = () => {
         <>
             <div>
                 {!state.isAddData && <Button onClick={() => dispatchFunc({ type: "ShowAddUserForm" })}>Add New User</Button>}
-                {state.isAddData && <AddDataForm onSaveUserData={saveUserDataHandler} onCancel={() => dispatchFunc({ type: "ShowAddUserForm" })} />}
+                {state.isAddData && <AddDataFormFuncReducer onSaveUserData={saveUserDataHandler} onCancel={() => dispatchFunc({ type: "ShowAddUserForm" })} />}
             </div>
             <br />
             <div>
-                {state.isEditing ? <EditUserFunc editUser={state.editUserData} onCancel={() => dispatchFunc({ type: "ShowEditForm" })} onEditSuccess={updateDataHandler} /> : null}
+                {state.isEditing ? <EditUserFuncReducer editUser={state.editUserData} onCancel={() => dispatchFunc({ type: "ShowEditForm" })} onEditSuccess={updateDataHandler} /> : null}
             </div>
             <div className="container">
                 <Search

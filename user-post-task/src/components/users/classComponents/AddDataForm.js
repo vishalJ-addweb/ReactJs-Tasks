@@ -34,7 +34,7 @@ export class AddDataForm extends Component {
         if (this.state.setName && this.state.setUserName && this.state.setEmail && this.state.setAddress.setStreet && this.state.setAddress.setSuite && this.state.setAddress.setCity && this.state.setAddress.setZipCode && this.state.setAddress.geo.setLat && this.state.setAddress.geo.setLng && this.state.setPhone && this.state.setWebsite && this.state.setCompany.setCompName && this.state.setCompany.setCatchPhrase && this.state.setCompany.setBS) {
             const userData = {
                 name: this.state.setName,
-                userName: this.state.setUserName,
+                username: this.state.setUserName,
                 email: this.state.setEmail,
                 address: {
                     street: this.state.setAddress.setStreet,
