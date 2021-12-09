@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './redux/counter';
+import UseReducerCounter from './UseReducerCounter';
 // import { incNum, decNum, getUserInput } from './actions/index';
 
 function App() {
@@ -33,6 +34,10 @@ function App() {
           <button onClick={() => dispatch(increment())}>+</button>
         </div>
 
+        <br />
+        <br />
+        <br />
+        <UseReducerCounter />
       </div>
     </div>
   );
