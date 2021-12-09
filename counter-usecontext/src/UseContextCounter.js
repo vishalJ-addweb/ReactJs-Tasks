@@ -18,7 +18,7 @@ const UseContextCounter = () => {
                 <button onClick={() => {
                     dispatch({ type: "decrement" })
                 }}>-</button>
-                <span>{state.count} </span>
+                <span>{state.count}</span>
                 <button onClick={() => { dispatch({ type: "increment" }) }}>+</button>
             </div>
         </div>
