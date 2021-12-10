@@ -9,8 +9,6 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "increment":
-      console.log("reducer func")
-      // return { ...state, count: state.count + +state.difference }
       return { ...state, count: state.count + +state.difference }
     case "decrement":
       return { ...state, count: state.count - state.difference }
@@ -24,13 +22,8 @@ const reducer = (state, action) => {
 const State = createContext();
 const Dispatch = createContext();
 
-const dummyFunc=(act)=>{
-  console.log(act)
-}
-
 const isnumber = (action) => {
-  // console.log(action)
-  dummyFunc(action)
+  console.log(action)
 };
 
 const useReducerWithMiddleware = (reducer, initialState, middlewareFn) => {
