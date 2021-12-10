@@ -23,15 +23,25 @@ const State = createContext();
 const Dispatch = createContext();
 
 const isnumber = (action) => {
-  console.log(action)
+  // console.log(action)
+  switch (action.type) {
+    case "incrementByAmount":
+      if (action.value > 0) {
+        return action
+      } else {
+        return { ...action, value: 1 }
+      }
+    default:
+      return action
+  }
 };
 
 const useReducerWithMiddleware = (reducer, initialState, middlewareFn) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const dispatchWithMiddleware = (action) => {
-    middlewareFn(action);
-    dispatch(action);
+    const newAction = middlewareFn(action);
+    dispatch(newAction);
   };
 
   return [state, dispatchWithMiddleware];
