@@ -11,6 +11,8 @@ const reducer = (state, action) => {
             return { ...state, count: state.count - state.difference }
         case "INCREMENTBYNUMBER":
             return { ...state, difference: action.value }
+        default :
+            return state
     }
 }
 const UseReducerCounter = () => {
