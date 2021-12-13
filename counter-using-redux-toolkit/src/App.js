@@ -4,7 +4,7 @@ import { decrement, increment, incrementByAmount } from './redux/counter'
 
 function App() {
 
-  const { count, difference } = useSelector((state) => state.counter)
+  const { count } = useSelector((state) => state.counter)
   const dispatch = useDispatch()
 
   return (
