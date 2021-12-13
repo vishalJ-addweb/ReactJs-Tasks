@@ -1,7 +1,6 @@
-export const incNum = (num) => {
+export const incNum = () => {
     return {
         type: "INCREMENT",
-        payload:num
     }
 }
 export const decNum = () => {
@@ -12,6 +11,6 @@ export const decNum = () => {
 export const getUserInput = (num) => {
     return {
         type: "GETUSERINPUT",
-        payload:num
+        payload: num
     }
 }

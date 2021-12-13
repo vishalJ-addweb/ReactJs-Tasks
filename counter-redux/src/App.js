@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { decrement, increment, incrementByAmount } from './redux/counter';
 import UseReducerCounter from './UseReducerCounter';
 import { incNum, decNum, getUserInput } from './actions/index';
 
@@ -8,10 +7,6 @@ function App() {
 
   const myState = useSelector((state) => state.changeNumber)
   const dispatch = useDispatch();
-
-  // const count = useSelector((state) => state.counter.count)
-  // const difference = useSelector((state) => state.counter.difference)
-  // const dispatch = useDispatch();
 
   return (
     <div>

@@ -7,7 +7,8 @@ const changeNumber = (state = initialState, action) => {
     switch (action.type) {
         case "INCREMENT": return {...state,count:state.count + +state.difference}
         case "DECREMENT": return {...state,count:state.count-state.difference}
-        case "GETUSERINPUT": return {...state, difference:action.payload}
+        // case "GETUSERINPUT": return {...state, difference:action.payload}
+        case "AGE_USERINPUT_ASYNC": return {...state, difference:action.value}
         default: return state
     }
 }
