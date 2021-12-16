@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import MultiForm from "./components/MultiForm";
 
-function App(props) {
+function App() {
   return (
     <div className="container">
       <br />
