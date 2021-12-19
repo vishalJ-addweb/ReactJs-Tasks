@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
+// import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
+import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -26,12 +30,23 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+// import { Expand } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
 const SideBar = (props) => {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [dashboardOpen, setDashboardOpen] = useState(false);
+  const [pagesOpen, setPagesOpen] = useState(false);
+  const [invoicesOpen, setInvoicesOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+
+  const [componentsOpen, setComponentsOpen] = useState(false);
+  const [formsOpen, setFormsOpen] = useState(false);
+  const [tablesOpen, setTablesOpen] = useState(false);
+  const [iconsOpen, setIconsOpen] = useState(false);
+  const [mapsOpen, setMapsOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -39,56 +54,161 @@ const SideBar = (props) => {
 
   const drawer = (
     <div>
-      <Toolbar>
+      {/* <Toolbar>
         <Typography>Material App</Typography>
-      </Toolbar>
+      </Toolbar> */}
+
       <List>
-        {[
-          { text: "Dashboard", icon: <DashboardIcon /> },
-          { text: "Pages", icon: <WebOutlinedIcon /> },
-          { text: "Projects", icon: <AssignmentOutlinedIcon /> },
-          { text: "Orders", icon: <ShoppingCartOutlinedIcon /> },
-          { text: "Tasks", icon: <CheckBoxOutlinedIcon /> },
-          { text: "Calendar", icon: <CalendarTodayOutlinedIcon /> },
-          { text: "Auth", icon: <GroupOutlinedIcon /> },
-        ].map((text) => (
-          <ListItem button key={text.text}>
-            <ListItemIcon>{text.icon}</ListItemIcon>
-            <ListItemText primary={text.text} />
-          </ListItem>
-        ))}
+        <ListSubheader component="div" id="nested-list-subheader">
+          PAGES
+        </ListSubheader>
+
+        <ListItem button onClick={() => setDashboardOpen(!dashboardOpen)}>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />
+          {dashboardOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button onClick={() => setPagesOpen(!pagesOpen)}>
+          <ListItemIcon>
+            <WebOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Pages" />
+          {pagesOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <AssignmentOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Projects" />
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <ShoppingCartOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Orders" />
+        </ListItem>
+
+        <ListItem button onClick={() => setInvoicesOpen(!invoicesOpen)}>
+          <ListItemIcon>
+            <ShoppingCartOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Invoices" />
+          {invoicesOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <CheckBoxOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Tasks" />
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <CalendarTodayOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Calendar" />
+        </ListItem>
+
+        <ListItem button onClick={() => setAuthOpen(!authOpen)}>
+          <ListItemIcon>
+            <GroupOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Auth" />
+          {authOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
       </List>
-      <Divider />
+
       <List>
-        {[
-          { text: "Components", icon: <GridViewOutlinedIcon /> },
-          { text: "Charts", icon: <AutoGraphOutlinedIcon /> },
-          { text: "Forms", icon: <ContentPasteOutlinedIcon /> },
-          { text: "Tables", icon: <FormatListBulletedOutlinedIcon /> },
-          { text: "Icons", icon: <FavoriteBorderOutlinedIcon /> },
-          { text: "Maps", icon: <MapOutlinedIcon /> },
-        ].map((text) => (
-          <ListItem button key={text.text}>
-            <ListItemIcon>
-              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-              {text.icon}
-            </ListItemIcon>
-            <ListItemText primary={text.text} />
-          </ListItem>
-        ))}
+        <ListSubheader component="div" id="nested-list-subheader">
+          ELEMENTS
+        </ListSubheader>
+
+        <ListItem button onClick={() => setComponentsOpen(!componentsOpen)}>
+          <ListItemIcon>
+            <GridViewOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Components" />
+          {componentsOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button>
+          <ListItemIcon>
+            <AutoGraphOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Charts" />
+        </ListItem>
+
+        <ListItem button onClick={() => setFormsOpen(!formsOpen)}>
+          <ListItemIcon>
+            <ContentPasteOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Forms" />
+          {formsOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button onClick={() => setTablesOpen(!tablesOpen)}>
+          <ListItemIcon>
+            <FormatListBulletedOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Tables" />
+          {tablesOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button onClick={() => setIconsOpen(!iconsOpen)}>
+          <ListItemIcon>
+            <FavoriteBorderOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Icons" />
+          {iconsOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+
+        <ListItem button onClick={() => setMapsOpen(!mapsOpen)}>
+          <ListItemIcon>
+            <MapOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Maps" />
+          {mapsOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
       </List>
-      <Divider />
       <List>
+        <ListSubheader component="div" id="nested-list-subheader">
+          MATERIAL APP
+        </ListSubheader>
         {[
           { text: "Documentation", icon: <MenuBookOutlinedIcon /> },
           { text: "Changelog", icon: <AutoGraphOutlinedIcon /> },
-        ].map((text, index) => (
-          <ListItem button key={text.text}>
-            <ListItemIcon>{text.icon}</ListItemIcon>
-            <ListItemText primary={text.text} />
+        ].map((item) => (
+          <ListItem button key={item.text}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
           </ListItem>
         ))}
       </List>
+      {/* <List>
+        <ListItem button key="1" onClick={listItemHandleClick}>
+          <ListItemIcon>
+            <MenuBookOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Hello" />
+          {listOpen ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={listOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <MenuBookOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Starred" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </List> */}
     </div>
   );
 
