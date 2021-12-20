@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-// import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
+import {
+  Divider,
+  AppBar,
+  Box,
+  CssBaseline,
+  Drawer,
+  IconButton,
+  ListSubheader,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import { indigo, grey } from "@mui/material/colors";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -30,13 +33,13 @@ import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
-// import { Expand } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
 const SideBar = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+
   const [dashboardOpen, setDashboardOpen] = useState(false);
   const [pagesOpen, setPagesOpen] = useState(false);
   const [invoicesOpen, setInvoicesOpen] = useState(false);
@@ -54,9 +57,10 @@ const SideBar = (props) => {
 
   const drawer = (
     <div>
-      {/* <Toolbar>
+      <Toolbar>
         <Typography>Material App</Typography>
-      </Toolbar> */}
+      </Toolbar>
+      <Divider />
 
       <List>
         <ListSubheader component="div" id="nested-list-subheader">
@@ -70,6 +74,19 @@ const SideBar = (props) => {
           <ListItemText primary="Dashboard" />
           {dashboardOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={dashboardOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Default" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Analytics" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Saas" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button onClick={() => setPagesOpen(!pagesOpen)}>
           <ListItemIcon>
@@ -78,6 +95,25 @@ const SideBar = (props) => {
           <ListItemText primary="Pages" />
           {pagesOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={pagesOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Profile" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Settings" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Pricing" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Chat" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Blank Page" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button>
           <ListItemIcon>
@@ -100,6 +136,16 @@ const SideBar = (props) => {
           <ListItemText primary="Invoices" />
           {invoicesOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={invoicesOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="List" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Detail" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button>
           <ListItemIcon>
@@ -123,6 +169,25 @@ const SideBar = (props) => {
           {authOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
       </List>
+      <Collapse in={authOpen} timeout="auto" unmountOnExit>
+        <List>
+          <ListItem button sx={{ pl: 9 }}>
+            <ListItemText primary="Sign In" />
+          </ListItem>
+          <ListItem button sx={{ pl: 9 }}>
+            <ListItemText primary="Sign Up" />
+          </ListItem>
+          <ListItem button sx={{ pl: 9 }}>
+            <ListItemText primary="Reset Password" />
+          </ListItem>
+          <ListItem button sx={{ pl: 9 }}>
+            <ListItemText primary="404 Page" />
+          </ListItem>
+          <ListItem button sx={{ pl: 9 }}>
+            <ListItemText primary="500 Page" />
+          </ListItem>
+        </List>
+      </Collapse>
 
       <List>
         <ListSubheader component="div" id="nested-list-subheader">
@@ -136,6 +201,52 @@ const SideBar = (props) => {
           <ListItemText primary="Components" />
           {componentsOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={componentsOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Alerts" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Accordian" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Avatars" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Badges" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Buttons" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Cards" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Chips" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Dialogs" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Lists" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Menus" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Pagination" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Progress" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Snackbars" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Tooltips" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button>
           <ListItemIcon>
@@ -151,6 +262,28 @@ const SideBar = (props) => {
           <ListItemText primary="Forms" />
           {formsOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={formsOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Pickers" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Selection Controls" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Selects" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Text Fields" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Editors" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Formik" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button onClick={() => setTablesOpen(!tablesOpen)}>
           <ListItemIcon>
@@ -159,6 +292,19 @@ const SideBar = (props) => {
           <ListItemText primary="Tables" />
           {tablesOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={tablesOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Simple Table" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Advanced Table" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Data Grid" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button onClick={() => setIconsOpen(!iconsOpen)}>
           <ListItemIcon>
@@ -167,6 +313,16 @@ const SideBar = (props) => {
           <ListItemText primary="Icons" />
           {iconsOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={iconsOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Material Icons" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Feather Icons" />
+            </ListItem>
+          </List>
+        </Collapse>
 
         <ListItem button onClick={() => setMapsOpen(!mapsOpen)}>
           <ListItemIcon>
@@ -175,6 +331,16 @@ const SideBar = (props) => {
           <ListItemText primary="Maps" />
           {mapsOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={mapsOpen} timeout="auto" unmountOnExit>
+          <List>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Google Maps" />
+            </ListItem>
+            <ListItem button sx={{ pl: 9 }}>
+              <ListItemText primary="Vactor Maps" />
+            </ListItem>
+          </List>
+        </Collapse>
       </List>
       <List>
         <ListSubheader component="div" id="nested-list-subheader">
@@ -190,25 +356,6 @@ const SideBar = (props) => {
           </ListItem>
         ))}
       </List>
-      {/* <List>
-        <ListItem button key="1" onClick={listItemHandleClick}>
-          <ListItemIcon>
-            <MenuBookOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Hello" />
-          {listOpen ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={listOpen} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <MenuBookOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List> */}
     </div>
   );
 
@@ -216,11 +363,13 @@ const SideBar = (props) => {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
+          backgroundColor: "white",
+          color: grey[900],
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -236,7 +385,7 @@ const SideBar = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            Material-UI Task
           </Typography>
         </Toolbar>
       </AppBar>
@@ -258,6 +407,19 @@ const SideBar = (props) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              overflow: "hidden",
+              "&:hover": {
+                overflow: "scroll",
+                overflowX: "hidden",
+              },
+              // width
+              "::-webkit-scrollbar": {
+                width: "5px",
+              },
+              // Handle
+              "::-webkit-scrollbar-thumb": {
+                backgroundColor: indigo[50],
+              },
             },
           }}
         >
@@ -270,6 +432,19 @@ const SideBar = (props) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              overflow: "hidden",
+              "&:hover": {
+                overflow: "scroll",
+                overflowX: "hidden",
+              },
+              // width
+              "::-webkit-scrollbar": {
+                width: "5px",
+              },
+              // Handle
+              "::-webkit-scrollbar-thumb": {
+                backgroundColor: indigo[50],
+              },
             },
           }}
           open
@@ -287,7 +462,7 @@ const SideBar = (props) => {
       >
         <Toolbar />
       </Box>
-    </Box>
+    </div>
   );
 };
 

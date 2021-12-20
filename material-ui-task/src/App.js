@@ -3,8 +3,7 @@ import SideBar from "./components/SideBar";
 
 function App() {
   return (
-    <div className="App">
-      Hello MUI
+    <div>
       <SideBar />
     </div>
   );
