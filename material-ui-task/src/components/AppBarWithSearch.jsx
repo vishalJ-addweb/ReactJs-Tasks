@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -19,13 +19,13 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { blue } from "@mui/material/colors";
+// import SideBar from "./SideBar";
 
 // const drawerWidth = 240;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  // backgroundColor: alpha(theme.palette.common.white, 0.15),
   backgroundColor: blue[700],
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -34,7 +34,6 @@ const Search = styled("div")(({ theme }) => ({
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("md")]: {
-    // marginLeft: theme.spacing(0),
     width: "auto",
   },
 }));
@@ -63,12 +62,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const AppBarWithSearch = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+const AppBarWithSearch = (props) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -87,9 +88,13 @@ const AppBarWithSearch = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleDrawerToggle = () => {
-    console.log("object");
+  const handleClickDrawerMenuIcon = () => {
+    setOpenDrawer(!openDrawer);
   };
+
+  // const isClose = () => {
+  //   setOpenDrawer(false);
+  // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -196,7 +201,8 @@ const AppBarWithSearch = () => {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={handleDrawerToggle}
+              onClick={handleClickDrawerMenuIcon}
+              // onClick={props.openDrawer}
               sx={{ mr: 2, display: { md: "none" } }}
             >
               <MenuIcon />
@@ -231,9 +237,11 @@ const AppBarWithSearch = () => {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+
               <IconButton size="large" color="inherit">
                 <LanguageOutlinedIcon />
               </IconButton>
+
               <IconButton
                 size="large"
                 edge="end"
@@ -264,6 +272,7 @@ const AppBarWithSearch = () => {
         {renderMobileMenu}
         {renderMenu}
       </Box>
+      {/* <SideBar isOpen={openDrawer} isClose={isClose} /> */}
     </>
   );
 };
