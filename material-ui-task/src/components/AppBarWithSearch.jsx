@@ -9,6 +9,7 @@ import {
   Badge,
   MenuItem,
   Menu,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -17,13 +18,15 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { blue } from "@mui/material/colors";
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  // backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: blue[700],
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
@@ -31,7 +34,7 @@ const Search = styled("div")(({ theme }) => ({
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("md")]: {
-    marginLeft: theme.spacing(3),
+    // marginLeft: theme.spacing(0),
     width: "auto",
   },
 }));
@@ -180,6 +183,14 @@ const AppBarWithSearch = () => {
           }}
         >
           <Toolbar>
+            <Box
+              sx={{
+                width: "240px",
+                display: { xs: "none", md: "flex" },
+              }}
+            >
+              <Typography>Material App</Typography>
+            </Box>
             <IconButton
               size="large"
               edge="start"

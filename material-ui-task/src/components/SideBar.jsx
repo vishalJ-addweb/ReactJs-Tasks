@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  // Divider,
+  Divider,
   // AppBar,
   Box,
   CssBaseline,
@@ -13,10 +13,10 @@ import {
   ListItemText,
   Collapse,
   Toolbar,
-  // Typography,
+  Typography,
 } from "@mui/material";
 // import { styled, alpha } from "@mui/material/styles";
-import { indigo } from "@mui/material/colors";
+import { indigo, blue } from "@mui/material/colors";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 // import MenuIcon from "@mui/icons-material/Menu";
@@ -214,10 +214,12 @@ const SideBar = (props) => {
 
   const drawer = (
     <div>
-      {/* <Toolbar sx={{ backgroundColor: blue[700] }}>
+      <Toolbar
+        sx={{ display: "sticky", backgroundColor: blue[700], color: "white" }}
+      >
         <Typography>Material App</Typography>
       </Toolbar>
-      <Divider /> */}
+      <Divider />
 
       <List>
         <ListSubheader component="div" id="nested-list-subheader">
