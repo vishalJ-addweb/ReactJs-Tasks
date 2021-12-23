@@ -19,9 +19,6 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { blue } from "@mui/material/colors";
-// import SideBar from "./SideBar";
-
-// const drawerWidth = 240;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,8 +66,6 @@ const AppBarWithSearch = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const [openDrawer, setOpenDrawer] = useState(false);
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -89,12 +84,8 @@ const AppBarWithSearch = (props) => {
   };
 
   const handleClickDrawerMenuIcon = () => {
-    setOpenDrawer(!openDrawer);
+    props.drawerOpen();
   };
-
-  // const isClose = () => {
-  //   setOpenDrawer(false);
-  // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -202,7 +193,6 @@ const AppBarWithSearch = (props) => {
               color="inherit"
               aria-label="open drawer"
               onClick={handleClickDrawerMenuIcon}
-              // onClick={props.openDrawer}
               sx={{ mr: 2, display: { md: "none" } }}
             >
               <MenuIcon />
