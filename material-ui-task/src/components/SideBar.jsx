@@ -16,21 +16,13 @@ import {
 import { indigo, blue } from "@mui/material/colors";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-// import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-// import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-// import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
-// import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
-// import WebOutlinedIcon from "@mui/icons-material/WebOutlined";
-// import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-// import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
-// import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-// import ContentPasteOutlinedIcon from "@mui/icons-material/ContentPasteOutlined";
-// import AssignmentOutlinedIcon from "@mui/icons-material/AssignmentOutlined";
-// import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
-import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import Routes from "./Routes";
+import {
+  pagesItems,
+  elementsItems,
+  materialAppItems,
+} from "../dataFiles/DrawerItemsList";
+import { hasChildren } from "../dataFiles/utils";
 
 const drawerWidth = 240;
 
@@ -41,202 +33,73 @@ const SideBar = (props) => {
     props.isClose();
   };
 
-  const RecursiveDrawerItems = (text, index, nestedItems = null) => {
+  const RecursiveDrawerItems = ({ item }) => {
+    const Component = hasChildren(item) ? MultiLevel : SingleLevel;
+    return <Component item={item} />;
+  };
+
+  const SingleLevel = ({ item }) => {
+    return (
+      <ListItem button>
+        <ListItemIcon>{item.icon}</ListItemIcon>
+        <ListItemText primary={item.title} />
+      </ListItem>
+    );
+  };
+
+  const MultiLevel = ({ item }) => {
     const [openElement, setOpenElement] = useState(false);
     const handleClick = useCallback(() => {
       setOpenElement(!openElement);
     }, [openElement, setOpenElement]);
-    if (nestedItems === null) {
-      return (
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary={text} />
+    return (
+      <>
+        <ListItem button onClick={handleClick}>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.title} />
+          {openElement ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-      );
-    } else {
-      return (
-        <>
-          <ListItem button onClick={handleClick}>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-            {openElement ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={openElement} timeout="auto" unmountOnExit>
-            <List component="div" sx={{ pl: 7 }}>
-              {nestedItems.map((text, index) => {
-                return RecursiveDrawerItems(text, index);
-              })}
-            </List>
-          </Collapse>
-        </>
-      );
-    }
+        <Collapse in={openElement} timeout="auto" unmountOnExit>
+          <List component="div">
+            {item.items.map((child, key) => {
+              return <RecursiveDrawerItems key={key} item={child} />;
+            })}
+          </List>
+        </Collapse>
+      </>
+    );
   };
 
   const drawer = (
     <div>
       <Toolbar
-        sx={{ display: "sticky", backgroundColor: blue[700], color: "white" }}
+        sx={{
+          display: "sticky",
+          backgroundColor: blue[700],
+          color: "white",
+        }}
       >
         <Typography>Material App</Typography>
       </Toolbar>
       <Divider />
-
-      <List>
-        <ListSubheader component="div" id="nested-list-subheader">
-          PAGES
-        </ListSubheader>
-
-        {[
-          "Dashboard",
-          "Pages",
-          "Projects",
-          "Orders",
-          "Invoices",
-          "Tasks",
-          "Calendar",
-          "Auth",
-        ].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Default",
-              "Analytics",
-              "Saas",
-            ]);
-          } else if (index === 1) {
-            return RecursiveDrawerItems(text, index, [
-              "Profile",
-              "Settings",
-              "Pricing",
-              "Chat",
-              "Blank Page",
-            ]);
-          } else if (index === 4) {
-            return RecursiveDrawerItems(text, index, [
-              "Profile",
-              "Settings",
-              "Pricing",
-              "Chat",
-              "Blank Page",
-            ]);
-          } else if (index === 7) {
-            return RecursiveDrawerItems(text, index, [
-              "Profile",
-              "Settings",
-              "Pricing",
-              "Chat",
-              "Blank Page",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-      </List>
-
-      <List>
-        <ListSubheader component="div" id="nested-list-subheader">
-          ELEMENTS
-        </ListSubheader>
-
-        {["Components"].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Alerts",
-              "Accordian",
-              "Avatars",
-              "Badges",
-              "Avatars",
-              "Buttons",
-              "Cards",
-              "Chips",
-              "Dialogs",
-              "Lists",
-              "Menus",
-              "Pagination",
-              "Progress",
-              "Snackbars",
-              "Tooltips",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-
-        <ListItem button>
-          <ListItemIcon>
-            <AutoGraphOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Charts" />
-        </ListItem>
-
-        {["Forms"].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Pickers",
-              "Selection Controls",
-              "Selects",
-              "Text Fields",
-              "Editors",
-              "Formik",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-
-        {["Tables"].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Simple Table",
-              "Advanced Table",
-              "Data Grid",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-
-        {["Icons"].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Material Icons",
-              "Feather Icons",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-
-        {["Maps"].map((text, index) => {
-          if (index === 0) {
-            return RecursiveDrawerItems(text, index, [
-              "Google Maps",
-              "Vactor Maps",
-            ]);
-          } else {
-            return RecursiveDrawerItems(text, index);
-          }
-        })}
-      </List>
-
-      <List>
-        <ListSubheader component="div" id="nested-list-subheader">
-          MATERIAL APP
-        </ListSubheader>
-        {[
-          { text: "Documentation", icon: <MenuBookOutlinedIcon /> },
-          { text: "Changelog", icon: <AutoGraphOutlinedIcon /> },
-        ].map((item) => (
-          <ListItem button key={item.text}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        ))}
-      </List>
+      <ListSubheader component="div" id="nested-list-subheader">
+        PAGES
+      </ListSubheader>
+      {pagesItems.map((item, key) => (
+        <RecursiveDrawerItems key={key} item={item} />
+      ))}
+      <ListSubheader component="div" id="nested-list-subheader">
+        Elements
+      </ListSubheader>
+      {elementsItems.map((item, key) => (
+        <RecursiveDrawerItems key={key} item={item} />
+      ))}
+      <ListSubheader component="div" id="nested-list-subheader">
+        Material App
+      </ListSubheader>
+      {materialAppItems.map((item, key) => (
+        <RecursiveDrawerItems key={key} item={item} />
+      ))}
       <Toolbar></Toolbar>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Toolbar } from "@mui/material";
 import Home from "./Home";
-// const drawerWidth = 240;
+const drawerWidth = 240;
 
 const Routes = () => {
   return (
