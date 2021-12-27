@@ -19,6 +19,7 @@ import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { blue } from "@mui/material/colors";
+// import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -185,6 +186,9 @@ const AppBarWithSearch = (props) => {
                 display: { xs: "none", md: "flex" },
               }}
             >
+              {/* <Typography component={Link} to="/">
+                Material App
+              </Typography> */}
               <Typography>Material App</Typography>
             </Box>
             <IconButton

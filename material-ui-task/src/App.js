@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import AppBarWithSearch from "./components/AppBarWithSearch";
-import Footer from "./components/Footer";
-import SideBar from "./components/SideBar";
+import AppBarWithSearch from "./components/fixed/AppBarWithSearch";
+import Footer from "./components/fixed/Footer";
+import SideBar from "./components/fixed/SideBar";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -10,15 +11,13 @@ function App() {
     setOpenDrawer(!openDrawer);
   };
 
-  // const isClose = () => {
-  //   setOpenDrawer(false);
-  // };
-
   return (
     <>
-      <AppBarWithSearch drawerOpen={handleDrawerOpen} />
-      <SideBar isOpen={openDrawer} isClose={handleDrawerOpen} />
-      <Footer />
+      <Router>
+        <AppBarWithSearch drawerOpen={handleDrawerOpen} />
+        <SideBar isOpen={openDrawer} isClose={handleDrawerOpen} />
+        <Footer />
+      </Router>
     </>
   );
 }

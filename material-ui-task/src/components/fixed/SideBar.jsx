@@ -16,13 +16,14 @@ import {
 import { indigo, blue } from "@mui/material/colors";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import Routes from "./Routes";
+import RoutesFiles from "../RoutesFiles";
 import {
   pagesItems,
   elementsItems,
   materialAppItems,
-} from "../dataFiles/DrawerItemsList";
-import { hasChildren } from "../dataFiles/utils";
+} from "../../dataFiles/DrawerItemsList";
+import { hasChildren } from "../../dataFiles/utils";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -40,7 +41,7 @@ const SideBar = (props) => {
 
   const SingleLevel = ({ item }) => {
     return (
-      <ListItem button>
+      <ListItem button component={Link} to={`${item.to}`}>
         <ListItemIcon>{item.icon}</ListItemIcon>
         <ListItemText primary={item.title} />
       </ListItem>
@@ -176,7 +177,7 @@ const SideBar = (props) => {
           {drawer}
         </Drawer>
       </Box>
-      <Routes />
+      <RoutesFiles />
     </div>
   );
 };

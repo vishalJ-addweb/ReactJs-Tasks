@@ -8,7 +8,7 @@ import {
   Divider,
   Button,
 } from "@mui/material";
-import Icon from "../images/lucy.jpg";
+import Icon from "../../images/lucy.jpg";
 const drawerWidth = 240;
 
 const Footer = () => {
